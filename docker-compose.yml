@@ -1,0 +1,38 @@
+#version: '3.9'
+
+services:
+  spring-boot-service:
+    build:
+      context: ./springboot-app
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+    networks:
+      - microservices-network
+
+  nestjs-service:
+    build:
+      context: ./nestjs-app
+      dockerfile: Dockerfile
+    ports:
+      - "8082:3000"
+    networks:
+      - microservices-network
+    depends_on:
+      - python-service
+
+  python-service:
+    build:
+      context: ./python-app
+      dockerfile: Dockerfile
+    ports:
+      - "8083:5000"
+    networks:
+      - microservices-network
+    depends_on:
+      - spring-boot-service
+
+
+networks:
+  microservices-network:
+    driver: bridge
