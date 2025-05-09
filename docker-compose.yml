@@ -1,38 +1,98 @@
-#version: '3.9'
+version: '3.9'
 
 services:
-  spring-boot-service:
-    build:
-      context: ./springboot-app
-      dockerfile: Dockerfile
-    ports:
-      - "8081:8080"
-    networks:
-      - microservices-network
 
   nestjs-service:
     build:
-      context: ./nestjs-app
+      context: ./nestjs-service
       dockerfile: Dockerfile
     ports:
-      - "8082:3000"
+      - "5001:3000"
     networks:
-      - microservices-network
+      - aeroline-network
     depends_on:
-      - python-service
+      - mongodb
+
+#    environment:
+#      - MONGO_URI=mongodb://mongodb:27017/equipaje_db
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    networks:
+      - aeroline-network
+    volumes:
+      - mongo_data:/data/db
+
 
   python-service:
     build:
-      context: ./python-app
+      context: ./python-service
       dockerfile: Dockerfile
     ports:
-      - "8083:5000"
+      - "5002:8000"
     networks:
-      - microservices-network
+      - aeroline-network
     depends_on:
-      - spring-boot-service
+      - mysql
+    # environment:
+    #   - DB_HOST=mysql
+    #   - DB_PORT=3306
+    #   - DB_USER=root
+    #   - DB_PASSWORD=root
+    #   - DB_NAME=compras_db
 
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - aeroline-network
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: compras_db
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+
+  spring-boot-service:
+    build:
+      context: ./spring-boot-service
+      dockerfile: Dockerfile
+    ports:
+      - "5003:8080"
+    networks:
+      - aeroline-network
+    depends_on:
+      - postgres
+    # environment:
+    #   - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/viajes_db
+    #   - SPRING_DATASOURCE_USERNAME=postgres
+    #   - SPRING_DATASOURCE_PASSWORD=postgres
+    #   - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
+
+  postgres:
+    image: postgres:14
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - aeroline-network
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: viajes_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
 networks:
-  microservices-network:
+  aeroline-network:
     driver: bridge
+
+volumes:
+  mongo_data:
+  mysql_data:
+  postgres_data:
