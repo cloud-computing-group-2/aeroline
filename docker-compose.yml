@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   springboot-app:
-    build: ./viajes-service
+    build: ./springboot-app
     environment:
       DB_HOST: postgres
       DB_PORT: 5432
