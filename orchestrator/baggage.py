@@ -1,11 +1,13 @@
 import requests
 import os
+from entities import EquipmentCreate
 
 API_EQUIPAJE_URL = os.getenv("API_EQUIPAJE_URL", "http://api_2:5002/e")
 
-def create_equipment(equipment: dict):
+def create_equipment(equipment: EquipmentCreate):
     try:
-        response = requests.post(API_EQUIPAJE_URL, json=equipment)
+        response = requests.post(API_EQUIPAJE_URL, json=equipment.dict())
+        print(response)
         if response.status_code == 201:
             return {"message": "equipment created", "data": response.json()}
         return {"error": "equipment wasn't created", "details": response.text}

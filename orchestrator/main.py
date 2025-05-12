@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from users import create_user, get_user
 from baggage import create_equipment, get_equipment
+from entities import EquipmentCreate
 from flights import create_flight, get_flight_by_id, get_all_flights, update_flight, delete_flight
 import os
 
@@ -16,8 +17,8 @@ async def get_user_endpoint(id: str):
     return get_user(id)
 
 # Equipaje
-@app.post("/equipment")
-async def create_equipment_endpoint(equipment: dict):
+@app.post("/equipment", )
+async def create_equipment_endpoint(equipment: EquipmentCreate):
     return create_equipment(equipment)
 
 @app.get("/equipment/{id}")

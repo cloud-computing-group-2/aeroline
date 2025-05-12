@@ -1,1 +1,7 @@
-pandas
+fastapi==0.95.0
+uvicorn==0.22.0
+sqlalchemy==2.0.0
+mysql-connector-python==8.0.30
+pydantic==1.10.4
+python-dotenv==0.21.1  # Si planeas usar variables de entorno para la configuración de la base de datos
+pymysql

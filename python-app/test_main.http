@@ -1,0 +1,38 @@
+### Obtener todos los pasajeros
+GET http://localhost:8000/pasajeros/
+
+### Crear un nuevo pasajero
+POST http://localhost:8000/pasajeros/
+Content-Type: application/json
+
+{
+  "nombre": "Juan",
+  "apellido": "Pérez",
+  "email": "juan.perez@example.com"
+}
+
+### Obtener todas las membresías
+GET http://localhost:8000/membresias/
+
+### Crear una nueva membresía
+POST http://localhost:8000/membresias/
+Content-Type: application/json
+
+{
+  "tipo": "Premium",
+  "descuento": 0.15
+}
+
+### Obtener todas las compras
+GET http://localhost:8000/compras/
+
+### Crear una nueva compra
+POST http://localhost:8000/compras/
+Content-Type: application/json
+
+{
+  "pasajero_id": 1,
+  "membresia_id": 1,
+  "fecha": "2024-07-24",
+  "monto": 100.00
+}
