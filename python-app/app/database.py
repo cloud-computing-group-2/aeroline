@@ -1,4 +1,6 @@
 import os
+from urllib.parse import quote_plus
+
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -14,9 +16,11 @@ DB_NAME = os.getenv("DB_NAME")
 DB_HOST = os.getenv("DB_HOST")
 DB_PORT = os.getenv("DB_PORT")
 
-# Configuración de la cadena de conexión
-SQLALCHEMY_DATABASE_URL = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/`{DB_NAME}`"
+DB_PASSWORD_ESCAPED = quote_plus(DB_PASSWORD)
 
+SQLALCHEMY_DATABASE_URL = (
+    f"mysql+pymysql://{DB_USER}:{DB_PASSWORD_ESCAPED}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+)
 # Crear el motor de la base de datos
 engine = create_engine(SQLALCHEMY_DATABASE_URL, pool_pre_ping=True)
 
@@ -33,3 +37,6 @@ def get_db():
         yield db
     finally:
         db.close()
+
+def init_db():
+    Base.metadata.create_all(bind=engine)

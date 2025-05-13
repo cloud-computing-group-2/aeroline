@@ -7,8 +7,8 @@ class Compra(Base):
 
     id_historial = Column(Integer, primary_key=True, index=True)
     fecha = Column(Date)
-    asiento = Column(String)
+    asiento = Column(String(10))
     id_pasajero = Column(Integer, ForeignKey("pasajeros.id_pasajero"))
-    id_vuelo = Column(Integer, ForeignKey("vuelos.id_vuelo"))  # Asegúrate de tener el modelo vuelo
+    id_vuelo = Column(Integer)  # Asegúrate de tener el modelo vuelo
 
     pasajero = relationship("Pasajero", back_populates="compras")

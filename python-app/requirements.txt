@@ -6,3 +6,4 @@ pydantic==1.10.4
 python-dotenv==0.21.1  # Si planeas usar variables de entorno para la configuración de la base de datos
 pymysql
 httpx
+cryptography
