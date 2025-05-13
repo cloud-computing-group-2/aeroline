@@ -31,7 +31,7 @@ services:
         DB_USER: "user"
         DB_PASSWORD: "usuarios_db"
         DB_HOST: 172.31.23.125
-        DB_PORT: 3306
+        DB_PORT: 3307
         PORT: 8082
     networks: [backend]
     ports: ["8082:8082"]
@@ -39,9 +39,9 @@ services:
   orchestrator:
     build: ./orchestrator
     environment:
-      API_VIAJE_URL: "http://springboot-app:8080//flight"
+      API_VIAJE_URL: "http://springboot-app:8080/"
       API_EQUIPAJE_URL: "http://nestjs-app:8081/"
-      API_USUARIOS_URL: "http://api_1:5001/user"
+      API_USUARIOS_URL: "http://python-app:8082/"
     depends_on: [nestjs-app, springboot-app]
     networks: [backend]
     ports: ["8000:8000"]
