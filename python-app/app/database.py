@@ -48,7 +48,7 @@ def init_db():
 def fake_pasajero():
     return {
         "nombre_completo": fake.name(),
-        "sexo": Faker.choice(["M", "F"]),
+        "sexo": fake.random_element(["M", "F"]),
         "fecha_nacimiento": fake.date_of_birth(minimum_age=18, maximum_age=80).isoformat(),
         "email": fake.email(),
         "telefono": fake.phone_number()
