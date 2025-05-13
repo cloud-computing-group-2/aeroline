@@ -5,7 +5,7 @@ from app.database import Base
 class Membresia(Base):
     __tablename__ = "membresias"
 
-    id_membresia = Column(Integer, primary_key=True, index=True)
+    id_membresia = Column(Integer, primary_key=True, index=True, autoincrement=True)
     tipo = Column(String(12))  # Puede ser 'clasica' o 'premium'
     fecha_exploracion = Column(Date)
     id_pasajero = Column(Integer, ForeignKey("pasajeros.id_pasajero"))
