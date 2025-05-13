@@ -30,13 +30,15 @@ async def create_flight_endpoint(flight: dict):
 async def get_equipment_endpoint(id: int):
     return get_equipment(id)
 
+@app.get("/flight/all")
+async def get_all_flights_endpoint():
+    return get_all_flights()
+
 @app.get("/flight/{id_flight}")
 async def get_flight_by_id_endpoint(id_flight: int):
     return get_flight_by_id(id_flight)
 
-@app.get("/flight/all")
-async def get_all_flights_endpoint():
-    return get_all_flights()
+
 
 @app.put("/flight/{id_flight}")
 async def update_flight_endpoint(id_flight: int, flight: dict):
