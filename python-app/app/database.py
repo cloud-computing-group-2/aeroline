@@ -15,7 +15,7 @@ DB_HOST = os.getenv("DB_HOST")
 DB_PORT = os.getenv("DB_PORT")
 
 # Configuración de la cadena de conexión
-SQLALCHEMY_DATABASE_URL = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+SQLALCHEMY_DATABASE_URL = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/`{DB_NAME}`"
 
 # Crear el motor de la base de datos
 engine = create_engine(SQLALCHEMY_DATABASE_URL, pool_pre_ping=True)
