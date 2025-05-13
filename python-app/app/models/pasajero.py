@@ -9,10 +9,9 @@ class Pasajero(Base):
     id_pasajero = Column(Integer, primary_key=True, index=True, autoincrement=True)
     
     nombre_completo = Column(String(256), index=True)
-    sexo = Column(String(8))
+    sexo = Column(String(16))
     fecha_nacimiento = Column(Date)
-    email = Column(String(32), unique=True)
+    email = Column(String(48), unique=True)
     telefono = Column(String(32), unique=True)
     compras = relationship("Compra", back_populates="pasajero")
     membresias = relationship("Membresia", back_populates="pasajero")
-

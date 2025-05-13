@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from app.routers import pasajero, membresia, compra, fake_data
-from app.database import init_db
+from app.scripts import init_db
 
 app = FastAPI()
 

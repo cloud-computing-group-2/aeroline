@@ -42,38 +42,3 @@ def get_db():
     finally:
         db.close()
 
-def init_db():
-    Base.metadata.create_all(bind=engine)
-
-def fake_pasajero():
-    return {
-        "nombre_completo": fake.name(),
-        "sexo": fake.random_element(["M", "F"]),
-        "fecha_nacimiento": fake.date_of_birth(minimum_age=18, maximum_age=80).isoformat(),
-        "email": fake.email(),
-        "telefono": fake.phone_number()
-    }
-
-def fake_compras():
-    return {
-        "id_historial": fake.random_int(min=1, max=20000),
-        "fecha": fake.date(),
-        "asiento": fake.random_element(elements=("1A", "2B", "3C")),
-        "id_pasajero": fake.random_int(min=1, max=20000), # FIXME: add constraint in range of existing users
-        "id_vuelo": fake.random_int(min=1, max=20000)
-    }
-
-def fake_membresias():
-    return {
-        "id_membresia": fake.random_int(min=1, max=20000),
-        "tipo": fake.random_element(elements=("Gold", "Silver", "Bronze")),
-        "fecha_inicio": fake.date(),
-        "fecha_fin": fake.date(),
-        "id_pasajero": fake.random_int(min=1, max=20000)
-    }
-
-def faking_db(count = 10):
-    [fake_pasajero() for _ in range(count)]
-    [fake_compras() for _ in range(count)]
-    [fake_membresias() for _ in range(count)]
-    pass

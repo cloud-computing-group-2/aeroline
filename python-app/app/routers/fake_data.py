@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 from app import schemas
-from app.database import faking_db
+from app.scripts import faking_db
 
 router = APIRouter()
 
