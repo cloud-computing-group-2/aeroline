@@ -7,3 +7,4 @@ python-dotenv==0.21.1  # Si planeas usar variables de entorno para la configurac
 pymysql
 httpx
 cryptography
+faker

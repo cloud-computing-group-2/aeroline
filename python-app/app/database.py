@@ -5,6 +5,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
+from faker import Faker
 
 # Cargar las variables de entorno
 load_dotenv()
@@ -30,6 +31,9 @@ Base = declarative_base()
 # Crear el objeto sessionmaker
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
+# Faker
+fake = Faker()
+
 # Dependencia para obtener la sesión de la base de datos
 def get_db():
     db = SessionLocal()
@@ -40,3 +44,36 @@ def get_db():
 
 def init_db():
     Base.metadata.create_all(bind=engine)
+
+def fake_pasajero():
+    return {
+        "nombre_completo": fake.name(),
+        "sexo": Faker.choice(["M", "F"]),
+        "fecha_nacimiento": fake.date_of_birth(minimum_age=18, maximum_age=80).isoformat(),
+        "email": fake.email(),
+        "telefono": fake.phone_number()
+    }
+
+def fake_compras():
+    return {
+        "id_historial": fake.random_int(min=1, max=1000),
+        "fecha": fake.date(),
+        "asiento": fake.random_element(elements=("1A", "2B", "3C")),
+        "id_pasajero": fake.random_int(min=1, max=100), # FIXME: add constraint in range of existing users
+        "id_vuelo": fake.random_int(min=1, max=100)
+    }
+
+def fake_membresias():
+    return {
+        "id_membresia": fake.random_int(min=1, max=1000),
+        "tipo": fake.random_element(elements=("Gold", "Silver", "Bronze")),
+        "fecha_inicio": fake.date(),
+        "fecha_fin": fake.date(),
+        "id_pasajero": fake.random_int(min=1, max=100)
+    }
+
+def faking_db(count = 10):
+    [fake_pasajero() for _ in range(count)]
+    [fake_compras() for _ in range(count)]
+    [fake_membresias() for _ in range(count)]
+    pass

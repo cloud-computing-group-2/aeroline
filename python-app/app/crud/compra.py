@@ -1,3 +1,5 @@
+import os
+
 from sqlalchemy.orm import Session
 from app.models.compra import Compra as CompraModel  # Importa el modelo SQLAlchemy
 from app.schemas.compra import CompraCreate  # Importa el esquema Pydantic
@@ -17,7 +19,7 @@ def create_compra(db: Session, compra: CompraCreate):
 
 
 async def vuelo_existe(id_vuelo: int) -> bool:
-    url = f"http://localhost:8080/vuelos/{id_vuelo}"  # Ajusta al endpoint real de tu microservicio Java
+    url = f'http://{os.getenv("SPRING_BOOT_SERVER")}/flight/{id_vuelo}'  # Ajusta al endpoint real de tu microservicio Java
     async with httpx.AsyncClient() as client:
         try:
             response = await client.get(url)
