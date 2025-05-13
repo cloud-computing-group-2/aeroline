@@ -5,7 +5,8 @@ from app.database import Base
 class Compra(Base):
     __tablename__ = "compras"
 
-    id_historial = Column(Integer, primary_key=True, index=True)
+    id_historial = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    
     fecha = Column(Date)
     asiento = Column(String(10))
     id_pasajero = Column(Integer, ForeignKey("pasajeros.id_pasajero"))

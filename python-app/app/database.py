@@ -56,20 +56,20 @@ def fake_pasajero():
 
 def fake_compras():
     return {
-        "id_historial": fake.random_int(min=1, max=1000),
+        "id_historial": fake.random_int(min=1, max=20000),
         "fecha": fake.date(),
         "asiento": fake.random_element(elements=("1A", "2B", "3C")),
-        "id_pasajero": fake.random_int(min=1, max=100), # FIXME: add constraint in range of existing users
-        "id_vuelo": fake.random_int(min=1, max=100)
+        "id_pasajero": fake.random_int(min=1, max=20000), # FIXME: add constraint in range of existing users
+        "id_vuelo": fake.random_int(min=1, max=20000)
     }
 
 def fake_membresias():
     return {
-        "id_membresia": fake.random_int(min=1, max=1000),
+        "id_membresia": fake.random_int(min=1, max=20000),
         "tipo": fake.random_element(elements=("Gold", "Silver", "Bronze")),
         "fecha_inicio": fake.date(),
         "fecha_fin": fake.date(),
-        "id_pasajero": fake.random_int(min=1, max=100)
+        "id_pasajero": fake.random_int(min=1, max=20000)
     }
 
 def faking_db(count = 10):

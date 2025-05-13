@@ -6,7 +6,8 @@ from app.database import Base
 class Pasajero(Base):
     __tablename__ = "pasajeros"
 
-    id_pasajero = Column(Integer, primary_key=True, index=True)
+    id_pasajero = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    
     nombre_completo = Column(String(256), index=True)
     sexo = Column(String(8))
     fecha_nacimiento = Column(Date)
