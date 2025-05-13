@@ -6,7 +6,7 @@ API_USUARIOS_URL = os.getenv("API_USUARIOS_URL", "http://api_1:5001/user")
 
 def create_user(user: dict):
     try:
-        response = requests.post(API_USUARIOS_URL, json=user)
+        response = requests.post(f"{API_USUARIOS_URL}pasajeros", json=user)
         if response.status_code == 201:
             return {"message": "user created", "data": response.json()}
         return {"error": "user not found", "details": response.text}
@@ -15,7 +15,7 @@ def create_user(user: dict):
 
 def get_user(id: str):
     try:
-        response = requests.get(f"{API_USUARIOS_URL}/{id}")
+        response = requests.get(f"{API_USUARIOS_URL}pasajeros")
         if response.status_code == 200:
             return response.json()
         return {"error": "user not found", "details": response.text}
