@@ -61,7 +61,7 @@ def faking_db_2(count=10):
     try:
         
         for i in range(count):
-            id_p = random.randint(1, count + 1)
+            id_p = random.randint(1, count)
             compra_data = fake_compras(id_p)
             compra = Compra(**compra_data)
 
