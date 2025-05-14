@@ -13,5 +13,5 @@ class Pasajero(Base):
     fecha_nacimiento = Column(Date)
     email = Column(String(48), unique=True)
     telefono = Column(String(32), unique=True)
-    compras = relationship("Compra", back_populates="pasajero")
-    membresias = relationship("Membresia", back_populates="pasajero")
+    membresias = relationship("Membresia", back_populates="pasajero", cascade="all, delete")
+    compras = relationship("Compra", back_populates="pasajero", cascade="all, delete")

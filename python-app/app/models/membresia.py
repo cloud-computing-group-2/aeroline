@@ -8,6 +8,6 @@ class Membresia(Base):
     id_membresia = Column(Integer, primary_key=True, index=True, autoincrement=True)
     tipo = Column(String(12))  # Puede ser 'clasica' o 'premium'
     fecha_exploracion = Column(Date)
-    id_pasajero = Column(Integer, ForeignKey("pasajeros.id_pasajero"))
+    id_pasajero = Column(Integer, ForeignKey("pasajeros.id_pasajero", ondelete="CASCADE"))
 
     pasajero = relationship("Pasajero", back_populates="membresias")
