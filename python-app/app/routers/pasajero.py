@@ -14,3 +14,6 @@ def read_pasajeros(skip: int = 0, limit: int = 100, db: Session = Depends(get_db
 def create_pasajero(pasajero: schemas.PasajeroCreate, db: Session = Depends(get_db)):
     return crud.create_pasajero(db=db, pasajero=pasajero)
 
+@router.delete("/delete_all")
+def delete_all(db: Session = Depends(get_db)):
+    return crud.delete_all(db=db)

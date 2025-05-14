@@ -42,26 +42,26 @@ def fake_membresias(id_pasajero):
 def faking_db(count=10):
     db = SessionLocal()
     try:
-        # Crear y agregar pasajeros
-        pasajeros = []
-        for _ in range(count):
+        
+        for i in range(count):
             pasajero_data = fake_pasajero(db)
             pasajero = Pasajero(**pasajero_data)
             db.add(pasajero)
-            pasajeros.append(pasajero)
-        db.commit()  # Confirmar para obtener IDs generados
+            
 
-        # Crear y agregar compras
-        for pasajero in pasajeros:
-            compra_data = fake_compras(pasajero.id_pasajero)
+        db.commit()  
+
+        for i in range(count):
+            id_p = random.randint(1, count + 1)
+            compra_data = fake_compras(id_p)
             compra = Compra(**compra_data)
-            db.add(compra)
 
-        # Crear y agregar membresías
-        for pasajero in pasajeros:
-            membresia_data = fake_membresias(pasajero.id_pasajero)
+            membresia_data = fake_membresias(i+1)
             membresia = Membresia(**membresia_data)
             db.add(membresia)
+
+            db.add(compra)
+
 
         db.commit()
     except Exception as e:
