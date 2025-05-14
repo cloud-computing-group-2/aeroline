@@ -1,4 +1,5 @@
 from faker import Faker
+import random
 from app.models import Pasajero, Compra, Membresia
 from app.database import engine, Base, SessionLocal, get_db
 
@@ -47,10 +48,18 @@ def faking_db(count=10):
             pasajero_data = fake_pasajero(db)
             pasajero = Pasajero(**pasajero_data)
             db.add(pasajero)
-            
 
-        db.commit()  
+        db.commit()
+    except Exception as e:
+        db.rollback()
+        raise e
+    finally:
+        db.close()
 
+def faking_db_2(count=10):
+    db = SessionLocal()
+    try:
+        
         for i in range(count):
             id_p = random.randint(1, count + 1)
             compra_data = fake_compras(id_p)
@@ -61,7 +70,6 @@ def faking_db(count=10):
             db.add(membresia)
 
             db.add(compra)
-
 
         db.commit()
     except Exception as e:
