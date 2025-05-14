@@ -43,7 +43,7 @@ services:
       API_VIAJE_URL: "http://springboot-app:8080/"
       API_EQUIPAJE_URL: "http://nestjs-app:8081/"
       API_USUARIOS_URL: "http://python-app:8082/"
-    depends_on: [nestjs-app, springboot-app]
+    depends_on: [nestjs-app, springboot-app, python-app]
     networks: [backend]
     ports: ["8000:8000"]
 
