@@ -21,14 +21,15 @@ async def get_user_endpoint(id: str):
 async def create_equipment_endpoint(equipment: EquipmentCreate):
     return create_equipment(equipment)
 
+@app.get("/equipment/{id}")
+async def get_equipment_endpoint(id: int):
+    return get_equipment(id)
+
 # Vuelos
 @app.post("/flight")
 async def create_flight_endpoint(flight: dict):
     return create_flight(flight)
-@app.get("/equipment/{id}")
 
-async def get_equipment_endpoint(id: int):
-    return get_equipment(id)
 
 @app.get("/flight/all")
 async def get_all_flights_endpoint():
@@ -37,8 +38,6 @@ async def get_all_flights_endpoint():
 @app.get("/flight/{id_flight}")
 async def get_flight_by_id_endpoint(id_flight: int):
     return get_flight_by_id(id_flight)
-
-
 
 @app.put("/flight/{id_flight}")
 async def update_flight_endpoint(id_flight: int, flight: dict):
